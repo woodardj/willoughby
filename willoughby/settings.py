@@ -1,5 +1,6 @@
-import dj_database_url
+import dj_database_url, os
 # Django settings for willoughby project.
+PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__).replace('\\','/'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -108,6 +109,7 @@ ROOT_URLCONF = 'willoughby.urls'
 WSGI_APPLICATION = 'willoughby.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_ROOT,'templates')
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -124,6 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'bootstrap_toolkit',
 )
 
 # A sample logging configuration. The only tangible logging
