@@ -1,7 +1,6 @@
 {% extends "layouts/main.html" %}
 {% load bootstrap_toolkit %}
 {% block content %}
-Hey look a search field:
 <form action="/" method="GET">
   {% csrf_token %}
   {{ form|as_bootstrap }}
@@ -9,4 +8,6 @@ Hey look a search field:
     <button type="submit" class="btn primary">Submit</button>
   </div>
 </form>
+
+{{data}}
 {% endblock %}
