@@ -8,20 +8,23 @@ from forms import *
 def homepage(request):
   if 't' in request.GET:
     form = SearchForm(request.GET)
-    #imdb = ImdbLookup()
-    #flix = NetflixChecker()
 
     
     if form.is_valid():
+      imdb = ImdbLookup()
+      flix = NetflixChecker()
       amazon = AmazonChecker()
-      data = amazon.availability('Inception')
+      
+      movie_data = imdb.search(form.cleaned_data['t'])
 
-      #movie_data = imdb.search(form.cleaned_data['t'])
+      avail = []
 
-      #data = flix.availability(movie_data['Title'])
+      avail.extend(flix.availability(movie_data['Title']))
+      avail.extend(amazon.availability(movie_data['Title']))
+      
+      
 
-      print data
-      return render_to_response('homepage/results.html',{'form':form,'data':data})
+      return render_to_response('homepage/results.html',{'form':form,'movie':movie_data,'avail':avail})
   else:
     s = SearchForm()
     return render_to_response('homepage/homepage.html',{'form':s})
