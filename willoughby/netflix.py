@@ -9,11 +9,10 @@ class NetflixChecker(object):
     title_id = results['catalog'][0]['id']
     data = self.api.get_title(title_id,"format_availability")
     
-    print data
+    #print data
     
-    rval = {}
-    rval['netflix-instant'] = True if 'instant' in data['delivery_formats'] else False
-    rval['netflix-dvd'] = True if 'DVD' in data['delivery_formats'] else False
-    rval['netflix-bluray'] = True if 'Blu-ray' in data['delivery_formats'] else False
-    
+    rval = []
+    rval.append({"service":"netflix-instant","available": True if 'instant' in data['delivery_formats'] else False})
+    rval.append({"service":"netflix-dvd","available": True if 'DVD' in data['delivery_formats'] else False})
+    rval.append({"service":"netflix-bluray","available": True if 'Blu-ray' in data['delivery_formats'] else False})
     return rval
