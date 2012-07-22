@@ -1,4 +1,4 @@
-from amazonproduct import API
+from amazonproduct import API, NoExactMatchesFound
 import pprint
 
 class AmazonChecker(object):
@@ -15,17 +15,22 @@ class AmazonChecker(object):
     #api.call(Operation='ItemSearch', SearchIndex='Video') #US/Video? 493964
     #data = self.api.browse_node_lookup(16261631)
     
-    params = {
-      #'SearchIndex':'Movies',
-      'Title':'Inception'
-      #'ReponseGroup':'Medium',
-      #'IdType':'ASIN'
-    }
-    
     #data = self.api.item_lookup('B0047WJ11G', **params)
     #data = self.api.item_lookup('Inception', **params)
-    data = self.api.item_search('Movies',**params)
     
-    pp = pprint.PrettyPrinter(indent=3)
-    pp.pprint( dir(data['Items']['Item']) )
-    return data
+    #data = self.api.item_search("DVD", Title="Inception", ResponseGroup="Large")
+    try:
+      data = self.api.item_search("Video", Title=needle, BrowseNode="16261631")
+    except NoExactMatchesFound:
+      return [{"service":"amazon-instant", "available":False}]
+    
+    #print data
+    #print dir(data)
+    
+    #for root in data:
+    #  print "root"
+    #  print dir(root.Items.Item.ItemAttributes)
+    #  print root.Items.Item.ItemAttributes.Title
+    
+    #pp = pprint.PrettyPrinter(indent=3)
+    return [{"service":"amazon-instant", "available":True}]
