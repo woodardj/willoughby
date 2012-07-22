@@ -8,6 +8,18 @@
     <button type="submit" class="btn primary">Submit</button>
   </div>
 </form>
-
-{{data}}
+<div class="row">
+  <div class="poster" style="float:left; border: solid black 1px; margin: 25px;">
+    <img src="{{movie.Poster}}"/><br/>
+    {{movie.Poster}}
+  </div>
+  <div class="details">
+    {{movie.Title}}: {{movie.Plot}}
+  </div>
+</div>
+{% for service in avail %}
+<div class="row" style="border: solid black 1px; margin: 25px;">
+  {{ service.service }}: {{ service.available }}
+</div>
+{% endfor %}
 {% endblock %}
