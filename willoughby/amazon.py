@@ -3,8 +3,8 @@ import pprint
 
 class AmazonChecker(object):
   def __init__(self):
-    AWS_KEY = '***REMOVED***'
-    SECRET_KEY = '***REMOVED***'
+    AWS_KEY = ''
+    SECRET_KEY = ''
     ASSOCIATE_TAG = 'stream0a-20'
     
     self.api = API(AWS_KEY, SECRET_KEY, 'us', ASSOCIATE_TAG)
